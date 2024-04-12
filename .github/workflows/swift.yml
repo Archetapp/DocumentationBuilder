@@ -65,9 +65,12 @@ jobs:
       - name: Convert DocC Archive to Static Website
         uses: fwcd/swift-docc-action@v1
         with:
+          target: DocumentationBuilder
+          output: ./docs
+          hosting-base-path: documentationbuilder
+          disable-indexing: 'true'
+          transform-for-static-hosting: 'true'
           inputs: ${{ steps.generate_docs.outputs.doccarchive_path }}
-          output: "./docs"
-          base-url: "DocumentationBuilder"
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
