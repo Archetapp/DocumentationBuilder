@@ -57,7 +57,7 @@ jobs:
         with:
           target: DocumentationBuilder
           output: ./docs
-          hosting-base-path: documentationbuilder
+          hosting-base-path: ''
           disable-indexing: 'true'
           transform-for-static-hosting: 'true'
       - name: Setup Pages
