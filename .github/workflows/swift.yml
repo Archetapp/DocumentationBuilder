@@ -55,20 +55,14 @@ jobs:
             echo "No .doccarchive file found."
             exit 1
           fi
-          
+          echo "::set-output name=doccarchive_path::$doccarchive_path"
       - name: Convert DocC Archive to Static Website
         uses: fwcd/swift-docc-action@v1
         with:
-          inputs: "${{ steps.generate_docs.outputs.doccarchive_path }}"
+          inputs: ${{ steps.generate_docs.outputs.doccarchive_path }}
           output: "./docs"
           base-url: "DocumentationBuilder"
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: '.'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          path: './docs'  # Ensure this is correct
