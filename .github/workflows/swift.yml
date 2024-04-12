@@ -52,16 +52,6 @@ jobs:
         run: xcodebuild -showdestinations -scheme ${{ matrix.scheme }}
       - name: Skip Macro Validation
         run: defaults write com.apple.dt.Xcode IDESkipMacroFingerprintValidation -bool YES
-      - name: Generate DocC Documentation
-        id: generate_docs
-        run: |
-          xcodebuild docbuild -scheme DocumentationBuilder -destination generic/platform=${{ matrix.platform }} -derivedDataPath ./build
-          doccarchive_path=$(find ./build -name '*.doccarchive' -print -quit)
-          if [ -z "$doccarchive_path" ]; then
-            echo "No .doccarchive file found."
-            exit 1
-          fi
-          echo "::set-output name=doccarchive_path::$doccarchive_path"
       - name: Convert DocC Archive to Static Website
         uses: fwcd/swift-docc-action@v1
         with:
@@ -70,7 +60,6 @@ jobs:
           hosting-base-path: documentationbuilder
           disable-indexing: 'true'
           transform-for-static-hosting: 'true'
-          inputs: ${{ steps.generate_docs.outputs.doccarchive_path }}
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
