@@ -74,6 +74,9 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: './docs'
+          base-url: "/DocumentationBuilder"  # Ensure this matches your GitHub Pages URL structure
+      - name: Create .nojekyll file
+        run: touch ./docs/.nojekyll
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
