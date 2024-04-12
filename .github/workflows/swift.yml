@@ -27,7 +27,7 @@ jobs:
         macos: ['macos-14']
         scheme: ['DocumentationBuilder']
         command: ['docbuild']
-        platform: ['macOS'] # ADD 'iOS', 'tvOS', 'watchOS'
+        platform: ['macOS', 'iOS', 'tvOS', 'watchOS']
     steps:
       - name: Switch xcode to ${{ matrix.xcode }}
         uses: maxim-lobanov/setup-xcode@v1.5.1
@@ -48,8 +48,9 @@ jobs:
       - name: Skip Macro Validation
         run: defaults write com.apple.dt.Xcode IDESkipMacroFingerprintValidation -bool YES
       - name: Generate DocC Documentation
+        id: generate_docs
         run: |
-          xcodebuild docbuild -scheme DocumentationBuilder -destination generic/platform=macOS -derivedDataPath ./build
+          xcodebuild docbuild -scheme DocumentationBuilder -destination generic/platform=${{ matrix.platform }} -derivedDataPath ./build
           doccarchive_path=$(find ./build -name '*.doccarchive' -print -quit)
           if [ -z "$doccarchive_path" ]; then
             echo "No .doccarchive file found."
@@ -62,7 +63,12 @@ jobs:
           inputs: ${{ steps.generate_docs.outputs.doccarchive_path }}
           output: "./docs"
           base-url: "DocumentationBuilder"
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './docs'  # Ensure this is correct
+          path: './docs'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
