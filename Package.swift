@@ -18,15 +18,14 @@ let package = Package(
             targets: ["DocumentationBuilder"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-docc-plugin.git", from: "1.0.0"),
-        .package(url: "https://github.com/SwiftUIX/SwiftUIX.git", branch: "master"),
+        .package(url: "https://github.com/Archetapp/MySwiftPackage", branch: "main"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "DocumentationBuilder",
-            dependencies: ["SwiftUIX"]),
+            dependencies: ["MySwiftPackage"]),
         .testTarget(
             name: "DocumentationBuilderTests",
             dependencies: ["DocumentationBuilder"]),
