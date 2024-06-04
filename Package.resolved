@@ -1,5 +1,5 @@
 {
-  "originHash" : "36679ca4b4d901c2cd28d9628b18a6acc215702efd9536dc0ee356718fc7918f",
+  "originHash" : "ae29d3c2d5b26463561313418ecf0f3bc731cbfe07d8d2d075d7eca40fb0d09f",
   "pins" : [
     {
       "identity" : "myswiftpackage",
@@ -7,16 +7,7 @@
       "location" : "https://github.com/Archetapp/MySwiftPackage",
       "state" : {
         "branch" : "main",
-        "revision" : "8b4f1aae8c0fd12a0609f340f848d126d8a334f6"
-      }
-    },
-    {
-      "identity" : "starscream",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/daltoniam/Starscream.git",
-      "state" : {
-        "revision" : "a063fda2b8145a231953c20e7a646be254365396",
-        "version" : "3.1.2"
+        "revision" : "295cd53110409e98d2cd9fb776e1db49775c68b1"
       }
     }
   ],
